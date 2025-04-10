@@ -1,136 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="facebook-domain-verification" content="31w1bxiofzpzp1hi3a76khzx6gc3sa" />
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NGDSNTPS');</script>
-    <!-- End Google Tag Manager -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Resume</title>
-  <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { display: block; }
-  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@300;400;500;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <title>Pixels Mixer</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+    <style>
+      body {
+        background: #0f0f0f;
+        color: #fff;
+      }
+      canvas {
+        width: 100%;
+        height: 5px;
+        display: block;
+        margin: 10;
+      }
+      .headline {
+  font-size: 3rem;
+  font-family: 'doto';
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1rem;
+  color: white;
+}
+
+.subheadline {
+  font-size: 1.2rem;
+  font-family: 'Doto';
+  text-align: center;
+  margin: 1rem;
+  color: #ccc;
+}
+.inbody {
+  font-size: 1.2rem;
+  font-family: 'Atma';
+  text-align: center;
+  margin: 1rem;
+}
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  background: #00c9ff;
+  color: #000;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #00c9ff;
+  color: #00c9ff;
+}
+
+</style>
+<script src="https://cdn.tailwindcss.com"></script>    
 </head>
-<body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NGDSNTPS"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.110.0/examples/js/loaders/GLTFLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.110.0/examples/js/controls/OrbitControls.js"></script>
-  <script>
-    // Створення сцени
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+<body class="flex flex-col items-center justify-center min-h-screen text-center px-4">
+    <canvas id="viewer"></canvas>
+    <h1 class="headline">Pixels Mixer</h1>
+    <p class="subheadline">Creative Blender Tools & Scripts for 3D Artists</p>
+    <section id="products" class="bg-gray-900 py-16 px-6 text-white">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold mb-12 text-center">My Blender Add-ons</h2>
 
-    // Освітлення
-    const lightAmbient = new THREE.AmbientLight(0xffffff, 1);
-    scene.add(lightAmbient);
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+      <!-- Addon 1 -->
+      <div class="space-y-4">
+        <div class="rounded-xl overflow-hidden shadow-lg border border-gray-700">
+          <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <h3 class="text-2xl font-semibold">Smart Text Add-on</h3>
+        <p class="text-gray-300">
+          Create beautifully beveled and engraved 3D text with procedural styling. Works with Geometry Nodes.
+        </p>
+        <a href="https://blendermarket.com/products/YOUR-ADDON-URL-1" target="_blank"
+           class="inline-block bg-cyan-400 text-black px-6 py-3 rounded-xl font-semibold hover:bg-cyan-300 transition">
+          View on Blender Market
+        </a>
+      </div>
 
+      <!-- Addon 2 -->
+      <div class="space-y-4">
+        <div class="rounded-xl overflow-hidden shadow-lg border border-gray-700">
+          <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <h3 class="text-2xl font-semibold">Organic Surface Generator</h3>
+        <p class="text-gray-300">
+          Quickly apply cloth-like or liquid effects to any mesh. Ideal for motion graphics or realistic renders.
+        </p>
+        <a href="https://blendermarket.com/products/YOUR-ADDON-URL-2" target="_blank"
+           class="inline-block bg-cyan-400 text-black px-6 py-3 rounded-xl font-semibold hover:bg-cyan-300 transition">
+          View on Blender Market
+        </a>
+      </div>
+
+      <!-- Addon 3 -->
+      <div class="space-y-4 md:col-span-2">
+        <div class="rounded-xl overflow-hidden shadow-lg border border-gray-700">
+          <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <h3 class="text-2xl font-semibold">Procedural Damage Toolkit</h3>
+        <p class="text-gray-300">
+          Add realistic cracks, scratches, and weathering to any surface — fully procedural, with adjustable intensity.
+        </p>
+        <a href="https://blendermarket.com/products/YOUR-ADDON-URL-3" target="_blank"
+           class="inline-block bg-cyan-400 text-black px-6 py-3 rounded-xl font-semibold hover:bg-cyan-300 transition">
+          View on Blender Market
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- YouTube Gallery -->
+<section class="bg-black text-white py-16 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-10">Blender Add-ons in Action</h2>
     
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="aspect-w-16 aspect-h-9">
+        <iframe class="w-full h-full rounded-xl"
+          src="https://www.youtube.com/embed/ВАШ_ID_1"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
 
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(0, 0, 0); // Позиція джерела світ
-    scene.add(light);
-    const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1); // Червоне світло
-    directionalLight2.position.set(-10, 10, 5); // Позиція джерела світла
-    scene.add(directionalLight2);
-    const directionalLight3 = new THREE.DirectionalLight(0xffffff, 1); // Червоне світло
-    directionalLight2.position.set(20, 20, 30); // Позиція джерела світла
-    scene.add(directionalLight2);
-    // Контролери орбіти
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true; // Додавання інерції
-    controls.dampingFactor = 0.05;
+      <div class="aspect-w-16 aspect-h-9">
+        <iframe class="w-full h-full rounded-xl"
+          src="https://www.youtube.com/embed/ВАШ_ID_2"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
 
-    // Завантаження моделі
-    const loader = new THREE.GLTFLoader();
-    loader.load(
-  'pixelMixeer.gltf',
-  function(gltf) {
-    scene.add(gltf.scene);
-    gltf.scene.position.set(0, 0, 0);
-  },
-  undefined,
-  function(error) {
-    console.error('Error loading model:', error);
-  }
-);
+      <div class="aspect-w-16 aspect-h-9">
+        <iframe class="w-full h-full rounded-xl"
+          src="https://www.youtube.com/embed/ВАШ_ID_3"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Image Gallery -->
+<section class="bg-white py-16 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Gallery of Add-ons</h2>
 
-const loader2 = new THREE.GLTFLoader();
-loader2.load(
-  'ANIMATEDQR.gltf', // Шлях до вашої моделі
-  (gltf) => {
-    const model = gltf.scene; // Основна сцена моделі
-    // маштабування моделі
-    model.scale.set(0.5, 0.5, 0.5);
-    gltf.scene.position.set(0, -5, 10);
-    // gltf.scene.position.set(10, 5, 10);
-    //обертання моделі
-    model.rotation.x = 90 * (Math.PI / 180);
-    // model.rotation.z = 180 * (Math.PI / 180);
-    scene.add(model);
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="overflow-hidden rounded-2xl shadow-md hover:scale-105 transition">
+        <img src="images/addon1.jpg" alt="Addon Screenshot 1" class="w-full h-auto">
+      </div>
+      <div class="overflow-hidden rounded-2xl shadow-md hover:scale-105 transition">
+        <img src="images/addon2.jpg" alt="Addon Screenshot 2" class="w-full h-auto">
+      </div>
+      <div class="overflow-hidden rounded-2xl shadow-md hover:scale-105 transition">
+        <img src="images/addon3.jpg" alt="Addon Screenshot 3" class="w-full h-auto">
+      </div>
+      <!-- Додавай більше за тим же шаблоном -->
+    </div>
+  </div>
+</section>
 
-    // Анімаційний міксер
-    const mixer = new THREE.AnimationMixer(model);
-    gltf.animations.forEach((clip) => {
-      mixer.clipAction(clip).play(); // Запуск всіх анімацій
-    });
-
-    // Додавання міксера до оновлення
-    const clock = new THREE.Clock();
-
-    // Анімаційний цикл
-    function animate() {
-      requestAnimationFrame(animate);
-      const delta = clock.getDelta();
-      mixer.update(delta); // Оновлення анімації
-      renderer.render(scene, camera);
-    }
-
-    animate();
-  },
-  (xhr) => {
-    console.log(`Завантажено ${(xhr.loaded / xhr.total) * 100}% моделі.`);
-  },
-  (error) => {
-    console.error('Помилка завантаження моделі:', error);
-  }
-);
-// fetch('./tdobj/pixelMixeer.gltf')
-//   .then((response) => {
-//     if (!response.ok) throw new Error('Network response was not ok');
-//     console.log('GLTF loaded successfully:', response);
-//     return response.json();
-//   })
-//   .catch((error) => console.error('There was a problem with the fetch operation:', error));
-//     // Камера
-    camera.position.set(20, 5, 0); // Змінена початкова позиція камери
-
-    // Анімація
-    function animate() {
-      requestAnimationFrame(animate);
-      controls.update(); // Оновлення контролерів
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // Обробка зміни розміру вікна
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+  <section class="bg-gray-950 py-16 px-6 text-white">
+    <div class="max-w-xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+      <p class="text-gray-400 mb-8">
+        Subscribe to get Blender add-on updates, free tools, and exclusive launch discounts.
+      </p>
+  
+      <form id="subscribeForm" class="flex flex-col sm:flex-row gap-4 justify-center">
+        <input type="email" id="emailInput" placeholder="you@example.com"
+               class="w-full sm:w-auto px-4 py-3 rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+               required>
+        <button type="submit"
+                class="bg-cyan-500 text-black px-6 py-3 rounded-lg font-semibold hover:bg-cyan-400 transition">
+          Subscribe
+        </button>
+      </form>
+  
+      <p id="subscribeMsg" class="mt-4 text-sm text-green-400 hidden">Thanks for subscribing!</p>
+    </div>
+  </section>
+  
+  <script>
+    document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('subscribeMsg').classList.remove('hidden');
+      this.reset();
     });
   </script>
-</body>
-</html>
+  
+</section>
+
+    <!----------------------->
+    <!-- Hero 3D Preview -->
+
+    <!-- Minimal three.js viewer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.110.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.110.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+      // Створення сцени
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+      document.body.appendChild(renderer.domElement);
+      
+      // Освітлення
+      const lightAmbient = new THREE.AmbientLight(0xffffff, 1);
+      scene.add(lightAmbient);
+      
+      
+      
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(0, 0, 0); // Позиція джерела світ
+      scene.add(light);
+      const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1); // Червоне світло
+      directionalLight2.position.set(-10, 10, 5); // Позиція джерела світла
+      scene.add(directionalLight2);
+      const directionalLight3 = new THREE.DirectionalLight(0xffffff, 1); // Червоне світло
+      directionalLight2.position.set(20, 20, 30); // Позиція джерела світла
+      scene.add(directionalLight2);
+      // Контролери орбіти
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true; // Додавання інерції
+      controls.dampingFactor = 0.05;
+      
+      // Завантаження моделі
+      const loader = new THREE.GLTFLoader();
+      loader.load(
+        'pixelMixeer.gltf',
+        function(gltf) {
+          scene.add(gltf.scene);
+          gltf.scene.position.set(0, 0, 0);
+        },
+        undefined,
+        function(error) {
+          console.error('Error loading model:', error);
+        }
+      );
+      
+      const loader2 = new THREE.GLTFLoader();
+      loader2.load(
+        'ANIMATEDQR.gltf', // Шлях до вашої моделі
+        (gltf) => {
+          const model = gltf.scene; // Основна сцена моделі
+          // маштабування моделі
+          model.scale.set(0.5, 0.5, 0.5);
+          gltf.scene.position.set(0, -5, 10);
+          // gltf.scene.position.set(10, 5, 10);
+          //обертання моделі
+          model.rotation.x = 90 * (Math.PI / 180);
+          // model.rotation.z = 180 * (Math.PI / 180);
+          scene.add(model);
+          
+          // Анімаційний міксер
+          const mixer = new THREE.AnimationMixer(model);
+          gltf.animations.forEach((clip) => {
+            mixer.clipAction(clip).play(); // Запуск всіх анімацій
+          });
+          
+          // Додавання міксера до оновлення
+          const clock = new THREE.Clock();
+          
+          // Анімаційний цикл
+          function animate() {
+            requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+            mixer.update(delta); // Оновлення анімації
+            renderer.render(scene, camera);
+          }
+          
+          animate();
+        },
+        (xhr) => {
+          console.log(`Завантажено ${(xhr.loaded / xhr.total) * 100}% моделі.`);
+        },
+        (error) => {
+          console.error('Помилка завантаження моделі:', error);
+        }
+      );
+      // fetch('./tdobj/pixelMixeer.gltf')
+      //   .then((response) => {
+        //     if (!response.ok) throw new Error('Network response was not ok');
+        //     console.log('GLTF loaded successfully:', response);
+        //     return response.json();
+        //   })
+        //   .catch((error) => console.error('There was a problem with the fetch operation:', error));
+        //     // Камера
+        camera.position.set(20, 5, 0); // Змінена початкова позиція камери
+        
+        // Анімація
+        function animate() {
+          requestAnimationFrame(animate);
+          controls.update(); // Оновлення контролерів
+          renderer.render(scene, camera);
+        }
+        animate();
+        
+        // Обробка зміни розміру вікна
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth/2, window.innerHeight /2);
+        });
+        </script>
+        <!-- Text & CTA -->
+      
+        <div class="mt-6 space-x-4">
+          <a href="https://github.com/YOURUSERNAME" target="_blank" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-medium">
+            GitHub
+          </a>
+          <a href="#subscribe" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-full text-white font-medium">
+            Get Updates
+          </a>
+        </div>
+        <!-- Simple footer -->
+        <footer class="mt-16 text-sm text-gray-500">
+          Made with 💙 & Blender | &copy; 2025 pixelsmixer.com
+        </footer>
+  </body>
+  </html>
