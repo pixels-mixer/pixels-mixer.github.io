@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>three.js css3d - sprites</title>
+		<title>PIXELS MIXER</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link type="text/css" rel="stylesheet" href="main.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Doto:wght@100..900&family=Londrina+Shadow&display=swap" rel="stylesheet">
 		<style>
 			body {
-				background-color: #fff;
+				margin: 0;
+				background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 				color: #000;
+				overflow: hidden;
 			}
 			a {
 				color: #48f;
+			}
+			#info {
+				color: rgba(255,255,255,0.7);
+				font-family: 'Doto', sans-serif;
+				padding-top: 50px;
+				font-size: 64px;
+				font-weight: 700;
+				letter-spacing: 3px;
+				text-transform: uppercase;
 			}
 		</style>
 	</head>
 	<body>
 
-		<div id="info"><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> css3d - sprites</div>
+		<div id="info">PIXELS MIXER</div>
 		<div id="container"></div>
 
 		<script type="importmap">
@@ -45,6 +59,59 @@
 			const positions = [];
 			const objects = [];
 			let current = 0;
+
+			// Add text container
+			const textContainer = document.createElement('a');
+			textContainer.target = '_blank'; // Open links in new tab
+			textContainer.rel = 'noopener noreferrer';
+			textContainer.style.position = 'absolute';
+			textContainer.style.color = 'white';
+			textContainer.style.fontFamily = "'Londrina Shadow', cursive";
+			textContainer.style.fontSize = '36px'; // Doubled from 18px
+			textContainer.style.fontWeight = 'bold';
+			textContainer.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+			textContainer.style.opacity = '0';
+			textContainer.style.transition = 'opacity 1s, transform 0.3s';
+			textContainer.style.textDecoration = 'none';
+			textContainer.style.cursor = 'pointer';
+			textContainer.onmouseover = function() {
+				const currentTransform = this.style.transform;
+				this.style.transform = currentTransform + ' scale(2)';
+			};
+			textContainer.onmouseout = function() {
+				const currentTransform = this.style.transform;
+				this.style.transform = currentTransform.replace(' scale(2)', '');
+			};
+			document.body.appendChild(textContainer);
+
+			// Define texts and their positions for each shape
+			const shapeTexts = [
+				{ 
+					text: 'Buy Me a Coffee 💛 💙', 
+					position: { top: '35%', left: '70%', transform: 'translate(-50%, -50%)' },
+					link: 'https://buymeacoffee.com/mandriic'
+				},  // Plane
+				{ 
+					text: 'Superhivemarket', 
+					position: { top: '50%', left: '20%', transform: 'translateY(-50%)' },
+					link: 'https://superhivemarket.com/creators/pixels-mixer'
+				},  // Cube
+				{ 
+					text: 'Youtube', 
+					position: { top: '50%', left: '80%', transform: 'translate(-50%, -50%)' },
+					link: 'https://www.youtube.com/@pixels-mixer'
+				},  // Random
+				{ 
+					text: 'Facebook', 
+					position: { top: '25%', left: '50%', transform: 'translateX(-50%)' },
+					link: 'https://www.facebook.com/pixelsmixer'
+				},  // Sphere
+				{ 
+					text: 'Patreon', 
+					position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' },
+					link: 'https://www.patreon.com/pixelsmixer'
+				}  // Cylinder
+			];
 
 			init();
 			animate();
@@ -181,6 +248,45 @@
 				const offset = currentShape * particlesTotal * 3;
 				const duration = 2000;
 
+				// Update and animate text
+				textContainer.style.opacity = '0';
+				setTimeout(() => {
+					textContainer.textContent = shapeTexts[currentShape].text;
+					// Apply new position
+					Object.assign(textContainer.style, shapeTexts[currentShape].position);
+					// Update link if exists
+					if (shapeTexts[currentShape].link) {
+						textContainer.href = shapeTexts[currentShape].link;
+					} else {
+						textContainer.href = '#';
+					}
+					textContainer.style.opacity = '1';
+				}, 500);
+
+				// Define camera positions for each shape
+				const cameraPositions = [
+					{ x: 1200, y: 800, z: 3000 },  // Plane - default view (increased distance)
+					{ x: 2000, y: 1600, z: 1600 }, // Cube - diagonal view (increased distance)
+					{ x: 0, y: 0, z: 4000 },       // Random - front view (increased distance)
+					{ x: 3000, y: 0, z: 0 },       // Sphere - side view (increased distance)
+					{ x: 0, y: 3000, z: 0 }        // Cylinder - top view (increased distance)
+				];
+
+				// Animate camera position
+				new TWEEN.Tween(camera.position)
+					.to(cameraPositions[currentShape], duration)
+					.easing(TWEEN.Easing.Exponential.InOut)
+					.start();
+
+				// Animate camera lookAt
+				new TWEEN.Tween(camera)
+					.to({}, duration)
+					.onUpdate(() => {
+						camera.lookAt(0, 0, 0);
+					})
+					.start();
+
+				// Animate sprites
 				for ( let i = 0, j = offset; i < particlesTotal; i ++, j += 3 ) {
 					const object = objects[ i ];
 					new TWEEN.Tween( object.position )
