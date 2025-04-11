@@ -21,11 +21,15 @@
 			#info {
 				color: rgba(255,255,255,0.7);
 				font-family: 'Doto', sans-serif;
-				padding-top: 50px;
-				font-size: 64px;
+				font-size: 32px;
 				font-weight: 700;
 				letter-spacing: 3px;
 				text-transform: uppercase;
+			}
+			@media (max-width: 768px) {
+				#info {
+					font-size: 24px;
+				}
 			}
 		</style>
 	</head>
@@ -62,12 +66,12 @@
 
 			// Add text container
 			const textContainer = document.createElement('a');
-			textContainer.target = '_blank'; // Open links in new tab
+			textContainer.target = '_blank';
 			textContainer.rel = 'noopener noreferrer';
 			textContainer.style.position = 'absolute';
 			textContainer.style.color = 'white';
 			textContainer.style.fontFamily = "'Londrina Shadow', cursive";
-			textContainer.style.fontSize = '36px'; // Doubled from 18px
+			textContainer.style.fontSize = 'min(4vw, 36px)'; // Responsive font size
 			textContainer.style.fontWeight = 'bold';
 			textContainer.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
 			textContainer.style.opacity = '0';
@@ -83,6 +87,16 @@
 				this.style.transform = currentTransform.replace(' scale(2)', '');
 			};
 			document.body.appendChild(textContainer);
+
+			// Function to update text size based on screen size
+			function updateTextSize() {
+				const isMobile = window.innerWidth <= 768;
+				textContainer.style.fontSize = isMobile ? 'min(6vw, 24px)' : 'min(4vw, 36px)';
+			}
+
+			// Initial call and add resize listener
+			updateTextSize();
+			window.addEventListener('resize', updateTextSize);
 
 			// Define texts and their positions for each shape
 			const shapeTexts = [
