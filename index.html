@@ -39,6 +39,7 @@
 
 			let camera, scene, renderer;
 			let controls;
+			let currentShape = 0;
 
 			const particlesTotal = 512;
 			const positions = [];
@@ -139,6 +140,25 @@
 
 				}
 
+				// Cylinder
+
+				const cylinderRadius = 500;
+				const cylinderHeight = 1000;
+				const cylinderSegments = 32;
+
+				for ( let i = 0; i < particlesTotal; i ++ ) {
+					const segment = i % cylinderSegments;
+					const height = Math.floor(i / cylinderSegments) * (cylinderHeight / (particlesTotal / cylinderSegments)) - cylinderHeight/2;
+					
+					const angle = (segment / cylinderSegments) * Math.PI * 2;
+					
+					positions.push(
+						cylinderRadius * Math.cos(angle),
+						height,
+						cylinderRadius * Math.sin(angle)
+					);
+				}
+
 				//
 
 				renderer = new CSS3DRenderer();
@@ -152,27 +172,17 @@
 				//
 
 				window.addEventListener( 'resize', onWindowResize );
+				window.addEventListener( 'click', changeShape );
 
 			}
 
-			function onWindowResize() {
-
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-
-				renderer.setSize( window.innerWidth, window.innerHeight );
-
-			}
-
-			function transition() {
-
-				const offset = current * particlesTotal * 3;
+			function changeShape() {
+				currentShape = (currentShape + 1) % 5;
+				const offset = currentShape * particlesTotal * 3;
 				const duration = 2000;
 
 				for ( let i = 0, j = offset; i < particlesTotal; i ++, j += 3 ) {
-
 					const object = objects[ i ];
-
 					new TWEEN.Tween( object.position )
 						.to( {
 							x: positions[ j ],
@@ -181,15 +191,15 @@
 						}, Math.random() * duration + duration )
 						.easing( TWEEN.Easing.Exponential.InOut )
 						.start();
-
 				}
+			}
 
-				new TWEEN.Tween( this )
-					.to( {}, duration * 3 )
-					.onComplete( transition )
-					.start();
+			function onWindowResize() {
 
-				current = ( current + 1 ) % 4;
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
 
 			}
 
