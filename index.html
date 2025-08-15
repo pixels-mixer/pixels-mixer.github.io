@@ -124,7 +124,12 @@
 					text: 'Patreon', 
 					position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' },
 					link: 'https://www.patreon.com/pixelsmixer'
-				}  // Cylinder
+				},  // Cylinder
+				{ 
+					text: 'My Portfolio 🎨', 
+					position: { top: '75%', left: '25%', transform: 'translate(-50%, -50%)' },
+					link: 'https://pixelsmixer.myportfolio.com'
+				}  // Helix
 			];
 
 			init();
@@ -240,6 +245,24 @@
 					);
 				}
 
+				// Helix
+
+				const helixRadius = 600;
+				const helixHeight = 1200;
+				const helixTurns = 4;
+
+				for ( let i = 0; i < particlesTotal; i ++ ) {
+					const t = i / particlesTotal;
+					const y = (t - 0.5) * helixHeight;
+					const angle = t * helixTurns * Math.PI * 2;
+					
+					positions.push(
+						helixRadius * Math.cos(angle),
+						y,
+						helixRadius * Math.sin(angle)
+					);
+				}
+
 				//
 
 				renderer = new CSS3DRenderer();
@@ -258,7 +281,7 @@
 			}
 
 			function changeShape() {
-				currentShape = (currentShape + 1) % 5;
+				currentShape = (currentShape + 1) % 6;
 				const offset = currentShape * particlesTotal * 3;
 				const duration = 2000;
 
@@ -283,7 +306,8 @@
 					{ x: 2000, y: 1600, z: 1600 }, // Cube - diagonal view (increased distance)
 					{ x: 0, y: 0, z: 4000 },       // Random - front view (increased distance)
 					{ x: 3000, y: 0, z: 0 },       // Sphere - side view (increased distance)
-					{ x: 0, y: 3000, z: 0 }        // Cylinder - top view (increased distance)
+					{ x: 0, y: 3000, z: 0 },       // Cylinder - top view (increased distance)
+					{ x: 2500, y: 1500, z: 2500 }  // Helix - diagonal view (increased distance)
 				];
 
 				// Animate camera position
